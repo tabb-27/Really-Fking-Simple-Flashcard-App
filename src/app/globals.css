@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Native <dialog> modal scroll containment & backdrop */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  background: rgb(15 23 42 / 0.45);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* 3D Flashcard Flip Utilities */
+.perspective-1000 {
+  perspective: 1200px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Responsive Bulk Validation Preview Table */
+.table-wrapper {
+  overflow: auto;
+  max-inline-size: 100%;
+  max-block-size: min(320px, 45vh);
+  container-type: inline-size;
+}
+
+.validation-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.validation-table thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+}
+
+@container (width < 560px) {
+  .validation-table,
+  .validation-table thead,
+  .validation-table tbody,
+  .validation-table tr,
+  .validation-table th,
+  .validation-table td {
+    display: block;
+  }
+
+  .validation-table thead {
+    display: none;
+  }
+
+  .validation-table tr {
+    margin-block-end: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .validation-table td {
+    padding: 0.2rem 0;
+    border: none;
+  }
+
+  .validation-table td[data-label]::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: #64748b;
+  }
+}
